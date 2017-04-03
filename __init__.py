@@ -1,23 +1,20 @@
 from flask import Flask, request
 import RPi.GPIO as GPIO
+import time
 
+app = Flask(__name__)
 
 red_pin = 5
 green_pin = 6
 blue_pin = 13
 ON = 0
-OFF = 1
+OFF = 1  # for some reason relay is backwards, ON or 1 means OFF
 
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(red_pin, GPIO.OUT)  # red pin, controls 1st relay
 GPIO.setup(green_pin, GPIO.OUT)  # green pin, controls 4th relay (second relay appears broken)
 GPIO.setup(blue_pin, GPIO.OUT)  # blue pin, controls 3rd relay
-
-GPIO.output(red_pin, OFF)  # for some reason relay is backwards, ON or 1 means OFF
-GPIO.output(green_pin, OFF)
-GPIO.output(blue_pin, OFF)
-
-app = Flask(__name__)
 
 
 @app.route('/')
