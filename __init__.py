@@ -60,7 +60,7 @@ def blue():
 
 
 @app.route('/white', methods=['GET', 'POST'])
-def blue():
+def white():
     print('turning lights white')
     if request.method == "POST":
         GPIO.output(red_pin, ON)
@@ -71,7 +71,7 @@ def blue():
 
 
 @app.route('/all_off', methods=['GET', 'POST'])
-def blue():
+def all_off():
     print('turning lights off')
     if request.method == "POST":
         GPIO.output(red_pin, OFF)
