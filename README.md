@@ -1,2 +1,4 @@
-# Light_Relay_Beta
-control rgb leds with resin.io and rpi
+# relay_flaskapp
+control RGB LEDS, coffee pot and amp with resin.io and rpi
+
+All functions look for web request from Alexa
