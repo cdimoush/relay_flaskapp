@@ -141,6 +141,13 @@ def all_off():
     return 'amp off'
 
 
+# ############################################################ #
+#                                                              #
+# The last two functions are for ALL Off and Emergency Off     #
+#                                                              #
+# ############################################################ #
+
+
 @app.route('/all_off', methods=['GET', 'POST'])
 def all_off():
     print('turning everything off')
