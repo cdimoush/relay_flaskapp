@@ -88,7 +88,7 @@ def white():
 
 
 @app.route('/lights_off', methods=['GET', 'POST'])
-def all_off():
+def lights_off():
     print('turning lights off')
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(red_pin, OFF)
@@ -106,7 +106,7 @@ def all_off():
 
 
 @app.route('/coffee_on', methods=['GET', 'POST'])
-def all_off():
+def coffee_on():
     print('turning coffee on')
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(coffee_pin, ON)
@@ -115,7 +115,7 @@ def all_off():
 
 
 @app.route('/coffee_off', methods=['GET', 'POST'])
-def all_off():
+def coffee_off():
     print('turning coffee off')
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(coffee_pin, OFF)
@@ -124,7 +124,7 @@ def all_off():
 
 
 @app.route('/amp_on', methods=['GET', 'POST'])
-def all_off():
+def amp_on():
     print('turning amp on')
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(amp_pin, ON)
@@ -132,8 +132,8 @@ def all_off():
     return 'amp on'
 
 
-@app.route('/amp_of', methods=['GET', 'POST'])
-def all_off():
+@app.route('/amp_off', methods=['GET', 'POST'])
+def amp_off():
     print('turning amp off')
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(amp_pin, OFF)
