@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>home</title>
+</head>
+<body>
+
+    <h1 style='test-align:center; front-size:200%'>San Jack Automation</h1>
+
+    <p>Lights</p>
+
+    <form action = '/button' method = 'POST'>
+        <p><input type="submit" name="submit" value="red">
+            <input type="submit" name="submit" value="blue">
+            <input type="submit" name="submit" value="green">
+            <input type="submit" name="submit" value="purple">
+            <input type="submit" name="submit" value="white">
+        </p>
+        <p><input type="submit" name="submit" value="lights_off"></p>
+    </form>
+
+    <p><br>Appliances</p>
+
+    <form action = '/button' method = 'POST'>
+        <p><input type="submit" name="submit" value="amp_on">
+            <input type="submit" name="submit" value="coffee_on">
+        </p>
+        <p><input type="submit" name="submit" value="amp_off">
+            <input type="submit" name="submit" value="coffee_off">
+        </p>
+    </form>
+
+    <p><br>Shutdown</p>
+
+    <form action = '/button' method = 'POST'>
+        <p><input type="submit" name="submit" value="all_off"></p>
+    </form>
+
+</body>
+</html>

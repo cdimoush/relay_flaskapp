@@ -1,6 +1,7 @@
-from flask import Flask, request
+from flask import Flask, request, render_template, redirect, url_for
 import RPi.GPIO as GPIO
-import time
+
+print('Booting __init__.py file')
 
 app = Flask(__name__)
 
@@ -22,9 +23,17 @@ GPIO.setup(amp_pin, GPIO.OUT)  # amp pin, controls 6th relay
 
 
 @app.route('/')
-def test():
-    print('started on')
-    return 'Home Page of 8 channel relay control'
+def home():
+    return render_template('home.html')
+
+
+@app.route('/button', methods=['POST', 'GET'])
+def button():
+    if request.method == 'POST' or 'GET':
+        url_decorator = request.form['submit']
+        return redirect(url_for(url_decorator))
+    else:
+        return render_template('home.html')
 
 
 # ############################################################ #
@@ -41,7 +50,7 @@ def red():
         GPIO.output(green_pin, OFF)
         GPIO.output(blue_pin, OFF)
         print('done')
-    return 'red'
+    return render_template('home.html')
 
 
 @app.route('/green', methods=['GET', 'POST'])
@@ -52,7 +61,7 @@ def green():
         GPIO.output(green_pin, ON)
         GPIO.output(blue_pin, OFF)
         print('done')
-    return 'green'
+    return render_template('home.html')
 
 
 @app.route('/blue', methods=['GET', 'POST'])
@@ -63,7 +72,7 @@ def blue():
         GPIO.output(green_pin, OFF)
         GPIO.output(blue_pin, ON)
         print('done')
-    return 'blue'
+    return render_template('home.html')
 
 
 @app.route('/purple', methods=['GET', 'POST'])
@@ -73,7 +82,7 @@ def purple():
         GPIO.output(green_pin, OFF)
         GPIO.output(blue_pin, ON)
         print('done')
-    return 'purple'
+    return render_template('home.html')
 
 
 @app.route('/white', methods=['GET', 'POST'])
@@ -84,7 +93,7 @@ def white():
         GPIO.output(green_pin, ON)
         GPIO.output(blue_pin, ON)
         print('done')
-    return 'white'
+    return render_template('home.html')
 
 
 @app.route('/lights_off', methods=['GET', 'POST'])
@@ -95,7 +104,7 @@ def lights_off():
         GPIO.output(green_pin, OFF)
         GPIO.output(blue_pin, OFF)
         print('done')
-    return 'lights are off'
+    return render_template('home.html')
 
 
 # ############################################################ #
@@ -111,7 +120,7 @@ def coffee_on():
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(coffee_pin, ON)
         print('done')
-    return 'coffee on'
+    return render_template('home.html')
 
 
 @app.route('/coffee_off', methods=['GET', 'POST'])
@@ -120,7 +129,7 @@ def coffee_off():
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(coffee_pin, OFF)
         print('done')
-    return 'coffee off'
+    return render_template('home.html')
 
 
 @app.route('/amp_on', methods=['GET', 'POST'])
@@ -129,7 +138,7 @@ def amp_on():
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(amp_pin, ON)
         print('done')
-    return 'amp on'
+    return render_template('home.html')
 
 
 @app.route('/amp_off', methods=['GET', 'POST'])
@@ -138,7 +147,7 @@ def amp_off():
     if request.method == 'POST' or request.method == 'GET':
         GPIO.output(amp_pin, OFF)
         print('done')
-    return 'amp off'
+    return render_template('home.html')
 
 
 # ############################################################ #
@@ -158,7 +167,7 @@ def all_off():
         GPIO.output(coffee_pin, OFF)
         GPIO.output(amp_pin, OFF)
         print('done')
-    return 'every thing is off'
+    return render_template('home.html')
 
 
 @app.route('/emergency_off', methods=['GET', 'POST'])  # This function wipes all GPIO pins
@@ -174,4 +183,5 @@ def emergency_off():
 
 
 if __name__ == '__main__':
+    print('Flask Application Started')
     app.run(host='0.0.0.0', port=80)
