@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>home</title>
+    <title>home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
 
-    <h1 style='test-align:center; front-size:200%'>San Jack Automation</h1>
+    <h1>San Jack Automation</h1>
 
     <p>Lights</p>
 
     <form action = '/button' method = 'POST'>
-        <p><input type="submit" name="submit" value="red">
-            <input type="submit" name="submit" value="blue">
-            <input type="submit" name="submit" value="green">
-            <input type="submit" name="submit" value="purple">
-            <input type="submit" name="submit" value="white">
+        <p><input style = 'float: left; ' class='red_btn' type="submit" name="submit" value="red">
+            <input style = 'float: left; '  class='grn_btn' type="submit" name="submit" value="green">
+            <input style = 'float: left; '  class='blu_btn' type="submit" name="submit" value="blue">
         </p>
-        <p><input type="submit" name="submit" value="lights_off"></p>
+        <p><input style = 'float: left; ' class='pur_btn' type="submit" name="submit" value="purple">
+            <input style = 'float: left; ' class='whi_btn' type="submit" name="submit" value="white">
+            <input style = 'float: left; ' class='gre_btn' type="submit" name="submit" value="lights_off">
+        </p>
     </form>
 
-    <p><br>Appliances</p>
+    <p>Appliances</p>
 
     <form action = '/button' method = 'POST'>
-        <p><input type="submit" name="submit" value="amp_on">
-            <input type="submit" name="submit" value="coffee_on">
-        </p>
-        <p><input type="submit" name="submit" value="amp_off">
-            <input type="submit" name="submit" value="coffee_off">
+        <p><input style = 'float: left; ' class='grn_btn' type="submit" name="submit" value="coffee">
+            <input  style = 'display: block' class='gre_btn' type="submit" name="submit" value="coffee_off">
+
+        <input style = 'float: left; ' class='blu_btn' type="submit" name="submit" value="amp">
+            <input  class='gre_btn' type="submit" name="submit" value="amp_off">
         </p>
     </form>
 
     <p><br>Shutdown</p>
 
     <form action = '/button' method = 'POST'>
-        <p><input type="submit" name="submit" value="all_off"></p>
+        <p><input class='red_btn' type="submit" name="submit" value="all_off"></p>
     </form>
 
 </body>

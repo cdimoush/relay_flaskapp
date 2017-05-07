@@ -1,0 +1,157 @@
+
+body {
+    background-color: black;
+}
+h1 {
+    color: white;
+}
+p {
+    color: white;
+}
+
+.red_btn {
+	background-color:#b21f35;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:21px;
+	font-weight:bold;
+	padding:64px 37px;
+	width: 33%;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #810e05;
+	border: none;
+    outline:none;
+
+
+}
+.red_btn:hover {
+	background-color:#b21f1f;
+}
+.red_btn:active {
+	position:relative;
+	top:1px;
+}
+
+.grn_btn {
+	background-color:#00753b;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:21px;
+	font-weight:bold;
+	padding:64px 37px;
+	width: 33%;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #810e05;
+	border: none;
+    outline:none;
+
+}
+.grn_btn:hover {
+	background-color:#00760a;
+}
+.grn_btn:active {
+	position:relative;
+	top:1px;
+}
+
+.blu_btn {
+	background-color:#0053a5;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:21px;
+	font-weight:bold;
+	padding:64px 37px;
+	width: 33%;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #810e05;
+	border: none;
+    outline:none;
+
+}
+.blu_btn:hover {
+	background-color:#04478a;
+}
+.blu_btn:active {
+	position:relative;
+	top:1px;
+}
+
+.pur_btn {
+	background-color:#681e7e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:21px;
+	font-weight:bold;
+	padding:64px 37px;
+	width: 33%;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #810e05;
+	border: none;
+    outline:none;
+
+}
+.pur_btn:hover {
+	background-color:#550e6b;
+}
+.pur_btn:active {
+	position:relative;
+	top:1px;
+}
+
+.gre_btn {
+	background-color:#656366;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:21px;
+	font-weight:bold;
+	padding:64px 37px;
+	width: 33%;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #810e05;
+	border: none;
+    outline:none;
+
+
+}
+.gre_btn:hover {
+	background-color:#464447;
+}
+.gre_btn:active {
+	position:relative;
+	top:1px;
+}
+
+.whi_btn {
+	background-color:#fffcff;
+	display:inline-block;
+	cursor:pointer;
+	color:#a6a6a6;
+	font-family:Arial;
+	font-size:21px;
+	font-weight:bold;
+	padding:64px 37px;
+	width: 33%;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #810e05;
+	border: none;
+    outline:none;
+
+}
+.whi_btn:hover {
+	background-color:#f0f0f0;
+}
+.whi_btn:active {
+	position:relative;
+	top:1px;
+}
+
