@@ -135,7 +135,10 @@ def new_ask():
 
 @ask.intent('LightIntent')  # This handles just the RGB LEDS. Color is passed through from Amazon
 def request_light(color):
-    gpio_output(color)
+    if color == 'off':
+        gpio_output('lights_off')
+    else:
+        gpio_output(color)
     return statement('Turning Lights ' + color)
 
 
