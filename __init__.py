@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect
 from flask_ask import Ask, statement, question
+import random
 
 import RPi.GPIO as GPIO
 
@@ -43,6 +44,90 @@ color_dict = {'red': [0, 1, 1], 'green': [1, 0, 1], 'blue': [1, 1, 0], 'purple':
 appliance_dict = {'coffee': [0], 'coffee_off': [1], 'amp': [0], 'amp_off': [1]}
 # The synonym dictionary allows for multiple inputs from Alexa, then corrects them for program
 app_synonym_dict = {'coffee': ['coffee'], 'amp': ['amp', 'amplifier', 'stereo', 'speakers']}
+
+#######################################################################################################################
+#                                                                                                                     #
+#                                                                                                                     #
+#                     Below are Lists of Strings that Alexa will use for a variety of responses                       #
+#                                                                                                                     #
+#                       Also a function for selecting a response, some responses are weighted                         #
+#                                                                                                                     #
+#######################################################################################################################
+
+
+def select_statement(intent, color, appliance):
+
+    light_response = ['Turning lights to ' + color, 'Changing lights to ' + color, 'Good choice',
+                      'Are you trying to set the mood sir?', color + ' is a very lovely color']
+    gen_response = ['Yes sir.', 'On it.', 'Of course', 'Of course, if you need anything else let me know',
+                    'Processing your request']
+    coffee_response = ['Making coffee', 'Your coffee will be ready momentarily']
+    amp_response = ['Turning amplifier on', 'Amplifier is on', 'Powering the stereo now']
+    shutdown_response = ['Turning everything off', 'Talk to you later sir']
+    no_response = ['I am here if you need me']
+    funny_response = ['As you wish', 'Consider it done', 'I would love to', 'No worries',
+                      'Yes, I am sworn to carry your burden', 'Why do I have to do all the work',
+                      'How about you do something for once']
+    dirty_response = ['Fuck you, but sure', 'Maybe you should get off your ass and do it yourself']
+
+    i = random.randint(1, 100)
+
+    # The first group of if statements determine if the response should pertain to the specific output
+
+    if intent == 'LightIntent':
+        if 0 < i <= 40:
+            j = random.randint(0, len(light_response) - 1)
+            response = light_response[j]
+            return response
+    if intent == 'ApplianceIntent_ON':
+        if appliance == 'coffee':
+            if 0 < i <= 40:
+                j = random.randint(0, len(coffee_response) - 1)
+                response = coffee_response[j]
+                return response
+        if appliance == 'amp':
+            if 0 < i <= 40:
+                j = random.randint(0, len(amp_response) - 1)
+                response = amp_response[j]
+                return response
+    if intent == 'ApplianceIntent_OFF':
+        if appliance == 'coffee':
+            if 0 < i <= 40:
+                j = random.randint(0, len(coffee_response) - 1)
+                response = coffee_response[j]
+                return response
+        if appliance == 'amp':
+            if 0 < i <= 40:
+                j = random.randint(0, len(amp_response) - 1)
+                response = amp_response[j]
+                return response
+    if intent == 'ShutdownIntent':
+        if 0 < i <= 40:
+            j = random.randint(0, len(shutdown_response) - 1)
+            response = shutdown_response[j]
+            return response
+    if intent == 'NoIntent':
+        if 0 < i <= 40:
+            j = random.randint(0, len(no_response) - 1)
+            response = no_response[j]
+            return response
+
+    # The second group of if statements decide if the response should be general (general, funny, dirty)
+
+    if 40 < i <= 80:
+        j = random.randint(0, len(gen_response) - 1)
+        response = gen_response[j]
+        return response
+    if 80 < i <= 95:
+        j = random.randint(0, len(funny_response) - 1)
+        response = funny_response[j]
+        return response
+    if 95 < i <= 100:
+        j = random.randint(0, len(dirty_response) - 1)
+        response = dirty_response[j]
+        return response
+
+#######################################################################################################################
 
 
 #######################################################################################################################
@@ -139,39 +224,39 @@ def request_light(color):
         gpio_output('lights_off')
     else:
         gpio_output(color)
-    return statement('Turning Lights ' + color)
+    return statement(select_statement('LightIntent', color, None))
 
 
 @ask.intent('ApplianceIntent_ON')
-def appliance_on(app):
+def appliance_on(appliance):
     for key in app_synonym_dict:
         for i in range(0, len(app_synonym_dict[key])):
-            if app == app_synonym_dict[key][i]:
-                app = key
-    gpio_output(app)
-    return statement('Turning ' + str(app) + ' on')
+            if appliance == app_synonym_dict[key][i]:
+                appliance = key
+    gpio_output(appliance)
+    return statement(select_statement('ApplianceIntent_ON', 'None', appliance))
 
 
 @ask.intent('ApplianceIntent_OFF')
-def appliance_off(app):
+def appliance_off(appliance):
     for key in app_synonym_dict:
         for i in range(0, len(app_synonym_dict[key])):
-            if app == app_synonym_dict[key][i]:
-                app = key
-    app_off = app + '_off'
+            if appliance == app_synonym_dict[key][i]:
+                appliance = key
+    app_off = appliance + '_off'
     gpio_output(app_off)
-    return statement('Turning ' + str(app) + ' off')
+    return statement(select_statement('ApplianceIntent_OFF', 'None', appliance))
 
 
 @ask.intent('ShutdownIntent')
 def shutdown():
     gpio_output('all_off')
-    return statement('Turning everything off')
+    return statement(select_statement('Shutdown', 'None', None))
 
 
 @ask.intent('NoIntent')
 def no_intent():
-    return statement('Why did you ask then, go fuck yourself')
+    return statement(select_statement('NoIntent', 'None', None))
 
 #######################################################################################################################
 #                                                                                                                     #
